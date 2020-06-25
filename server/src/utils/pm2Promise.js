@@ -45,7 +45,7 @@ const deleteProcess = (pm_id) => {
       if (err) {
         console.log(err);
         reject(err);
-      } 
+      }
       resolve(processes);
     });
   });
@@ -75,6 +75,17 @@ const stop = (pm_id) => {
   });
 };
 
+const describe = (process) => {
+	return new Promise((resolve, reject) => {
+		pm2.describe(process, (err, processDescription) => {
+			if (err) {
+				console.log(err);
+			}
+			resolve(processDescription);
+		});
+	});
+}
+
 module.exports = {
   list: list,
   create: create,
@@ -82,4 +93,5 @@ module.exports = {
   restart: restart,
   stop: stop,
   start: start,
+	describe: describe,
 };
