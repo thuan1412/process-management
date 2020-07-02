@@ -1,69 +1,57 @@
-import React, { Component, useEffect, useState } from "react";
-import { connect, useDispatch, useSelector, shallowEqual } from "react-redux";
-import { Tabs, Tab, Button } from "react-bootstrap";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Tabs, TabPane, Button } from "react-bootstrap";
+
+import ProcessesDetail from "./components/ProcessesDetail/ProcessesDetail";
 
 import { fetchProcessesName } from "./redux/processesName/actions";
-import { fetchProcessesDetail } from "./redux/processesDetail/actions";
 
-function App() {
-  const dispatch = useDispatch();
-  const processesName = useSelector((state) => state.processesName);
-  useEffect(() => {
-      dispatch(fetchProcessesName())
-  }, []);
+class App extends Component {
+  constructor(props) {
+    super(props);
+  }
 
-  return (
-    <div>
-      <Tabs defaultActiveKey={processesName[0]}>
-        {processesName.map((pName) => {
-          return (
-            <Tab key={pName} eventKey={pName} title={pName}>
-              <Button variant="primary">Primary</Button>
-            </Tab>
-          );
-        })}
-      </Tabs>
-    </div>
-  );
+  componentDidMount() {
+    this.props.fetchProcessesName();
+  }
+
+  componentDidUpdate() {
+    console.log("Update");
+  }
+
+  render() {
+    const { processesName } = this.props;
+    return (
+      <div>
+        <Tabs
+          defaultActiveKey="home"
+          transition={false}
+          id="noanim-tab-example"
+          defaultActiveKey={this.props.processesName[0]}
+        >
+          {this.props.processesName.map((proc) => {
+            return (
+              <TabPane
+                key={proc}
+                eventKey={proc}
+                title={proc}
+                unmountOnExit={true}
+              >
+                <ProcessesDetail pName={proc.slice(0, -3)}></ProcessesDetail>
+              </TabPane>
+            );
+          })}
+        </Tabs>
+        {/* <Button variant="primary">Primary</Button>
+        <ProcessesDetail pName={"process1.js".slice(0, -3)}></ProcessesDetail> */}
+      </div>
+    );
+  }
 }
-
-export default App;
-
-// class App extends Component {
-//   constructor(props) {
-//     super(props);
-//   }
-
-//   componentDidMount() {
-//     // if (!processesName.length) {
-//     this.props.fetchProcessesName();
-//     // }
-//   }
-
-//   componentDidUpdate() {
-//     console.log("Update");
-//   }
-
-//   render() {
-//     const { processesName } = this.props;
-//     return (
-//       <Tabs defaultActiveKey={processesName[0]}>
-//         {processesName.map((pName) => {
-//           return (
-//             <Tab key={pName} eventKey={pName} title={pName}>
-//               <Button variant="primary">Primary</Button>
-//             </Tab>
-//           );
-//         })}
-//       </Tabs>
-//     );
-//   }
-// }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchProcessesName: () => dispatch(fetchProcessesName()),
-    fetchProcessesDetail: (pName) => dispatch(fetchProcessesDetail(pName)),
   };
 };
 
@@ -72,4 +60,4 @@ const mapStateToProps = (state) => {
   return { processesName };
 };
 
-// export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
