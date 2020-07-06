@@ -1,0 +1,26 @@
+.proces-detail {
+  width: 500px;
+  padding: 30px;
+
+  .create-btn {
+    margin-left: 100px;
+    margin-bottom: 30px;
+  }
+  .proces-container {
+    height: 500px;
+    overflow-y: scroll;
+    .proc-detail {
+      display: flex;
+      flex-direction: column;
+      padding-left: 10px;
+      padding-bottom: 30px;
+      margin-bottom: 100px;
+      width: 80%;
+
+      .graph-btns {
+        display: flex;
+        flex-direction: row;
+      }
+    }
+  }
+}

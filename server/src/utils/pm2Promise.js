@@ -23,14 +23,14 @@ const create = (scriptPath) => {
       if (err) {
         reject(err);
       }
-      resolve(processes);
+      resolve(process);
     });
   });
 };
 
 const start = (pm_id) => {
   return new Promise((resolve, reject) => {
-    pm2.start(pm_id, (err, processes) => {
+    pm2.restart(pm_id, (err, processes) => {
       if (err) {
         reject(err);
       }
@@ -76,15 +76,15 @@ const stop = (pm_id) => {
 };
 
 const describe = (process) => {
-	return new Promise((resolve, reject) => {
-		pm2.describe(process, (err, processDescription) => {
-			if (err) {
-				console.log(err);
-			}
-			resolve(processDescription);
-		});
-	});
-}
+  return new Promise((resolve, reject) => {
+    pm2.describe(process, (err, processDescription) => {
+      if (err) {
+        console.log(err);
+      }
+      resolve(processDescription);
+    });
+  });
+};
 
 module.exports = {
   list: list,
@@ -93,5 +93,5 @@ module.exports = {
   restart: restart,
   stop: stop,
   start: start,
-	describe: describe,
+  describe: describe,
 };

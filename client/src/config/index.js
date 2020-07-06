@@ -14,8 +14,12 @@ const PROCESSES = {
   PROCESSES: "/api/processes",
 };
 
+const LOG = {
+  LOG: "/api/log",
+};
 export const API = {
   BASE: process.env.SERVER_URL || "http://localhost:3001",
   PM2: PM2,
   PROCESSES: PROCESSES,
+  LOG: LOG,
 };

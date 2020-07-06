@@ -3,8 +3,12 @@ import { connect } from "react-redux";
 import { Tabs, TabPane, Button } from "react-bootstrap";
 
 import ProcessesDetail from "./components/ProcessesDetail/ProcessesDetail";
+import LogMessage from "./components/LogMessage/LogMessage";
 
 import { fetchProcessesName } from "./redux/processesName/actions";
+import { selectProcess } from "./redux/selectedProcess/actions";
+
+import "./App.css";
 
 class App extends Component {
   constructor(props) {
@@ -15,19 +19,14 @@ class App extends Component {
     this.props.fetchProcessesName();
   }
 
-  componentDidUpdate() {
-    console.log("Update");
-  }
-
   render() {
-    const { processesName } = this.props;
     return (
       <div>
         <Tabs
-          defaultActiveKey="home"
           transition={false}
           id="noanim-tab-example"
           defaultActiveKey={this.props.processesName[0]}
+          onSelect={() => this.props.selectProcess(-1)}
         >
           {this.props.processesName.map((proc) => {
             return (
@@ -37,13 +36,14 @@ class App extends Component {
                 title={proc}
                 unmountOnExit={true}
               >
-                <ProcessesDetail pName={proc.slice(0, -3)}></ProcessesDetail>
+                <div className="process-container">
+                  <ProcessesDetail pname={proc.slice(0, -3)}></ProcessesDetail>
+                  <LogMessage selectedProcess={1}></LogMessage>
+                </div>
               </TabPane>
             );
           })}
         </Tabs>
-        {/* <Button variant="primary">Primary</Button>
-        <ProcessesDetail pName={"process1.js".slice(0, -3)}></ProcessesDetail> */}
       </div>
     );
   }
@@ -52,6 +52,7 @@ class App extends Component {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchProcessesName: () => dispatch(fetchProcessesName()),
+    selectProcess: (proc) => dispatch(selectProcess(proc)),
   };
 };
 

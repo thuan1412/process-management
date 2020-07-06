@@ -2,27 +2,21 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import CanvasJSReact from "../../canvasjs/canvasjs.react";
 
+import "./styles.scss";
+
 const CanvasJS = CanvasJSReact.CanvasJS;
 const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 export const ProcessGraph = (props) => {
-  let dataPoints;
-  if (props.processesDetail.length) {
-    console.log("repain");
-    dataPoints = props.processesDetail[0].cpu_hist.map((cpu, idx) => {
-      return { x: idx, y: cpu };
-    });
-  } else {
-    dataPoints = [];
-  }
+  const dataPoints = props.processDetail.cpu_hist.map((cpu, idx) => {
+    return { x: idx, y: cpu };
+  });
 
-  console.log(props.processesDetail);
   const options = {
-    theme: "light2",
-
+    theme: "dark1",
     subtitles: [
       {
-        text: "GBP & USD to INR",
+        text: "CPU",
       },
     ],
     axisY: {
@@ -34,22 +28,24 @@ export const ProcessGraph = (props) => {
     data: [
       {
         type: "area",
-        name: "GBP",
+        name: "CPU",
         showInLegend: false,
         yValueFormatString: "##.##",
         dataPoints: dataPoints,
       },
     ],
   };
+
+  const containerProps = {
+    height: 150,
+    width: 250,
+  };
+
   return (
-    <div>
-      <CanvasJSChart options={options} />
+    <div className="chart" height="100px">
+      <CanvasJSChart options={options} containerProps={containerProps} />
     </div>
   );
 };
 
-const mapStateToProps = (state) => ({});
-
-const mapDispatchToProps = {};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ProcessGraph);
+export default ProcessGraph;
