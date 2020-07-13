@@ -131,4 +131,19 @@ router.post("/start", (req, res) => {
     });
 });
 
+router.post("/restart", (req, res) => {
+  const pm_id = req.body.pm_id;
+  pm2Promise
+    .start(pm_id)
+    .then((processes) => {
+      res.send({
+        success: true,
+        process: processes[0].pm2_env.pm_id,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
 module.exports = router;

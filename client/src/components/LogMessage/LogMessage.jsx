@@ -79,6 +79,14 @@ class LogMessage extends Component {
     });
   };
 
+  reload = (event) => {
+    this.setState({
+      hasMore: true,
+      logs: [],
+      offset: 0,
+    });
+  };
+
   render() {
     return (
       <div>
@@ -91,7 +99,7 @@ class LogMessage extends Component {
           value="out"
           checked={this.state.type === "out"}
         />{" "}
-        Out
+        <label>Out</label>
         <input
           type="radio"
           id="out"
@@ -99,7 +107,8 @@ class LogMessage extends Component {
           name="logging-type"
           value="err"
         />{" "}
-        Error
+        <label>Error</label>
+        <button onClick={this.reload}>Reload</button>
         <div className="log-message-container">
           <InfiniteScroll
             loadMore={this.loadLogs}

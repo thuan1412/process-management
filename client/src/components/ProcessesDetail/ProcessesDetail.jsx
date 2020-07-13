@@ -28,23 +28,26 @@ class ProcessesDetail extends Component {
 
   render() {
     return (
-      <div className="proces-detail">
+      <div className="processes-detail">
         <Button
           className="create-btn"
           onClick={() => pm2Actions.create(this.props.pname)}
         >
           Create
         </Button>
-        <div className="proces-container">
+        <div className="processes-container">
           {this.props.processesDetail.map((processDetail) => (
             <div key={processDetail.pm_id} className="proc-detail">
-              <span>PM2 ID: {processDetail.pm_id}</span>
+              <span className="process-label">
+                PM2 ID: {processDetail.pm_id} - {processDetail.status}
+              </span>
               <button
+                className="view-log-btn"
                 onClick={() => this.props.selectProcess(processDetail.pm_id)}
               >
                 View log
               </button>
-              <div className="graph-btns">
+              <div className="graph-btn-container">
                 <ProcessGraph processDetail={processDetail} />
                 <ProcessButtons
                   pm_id={processDetail.pm_id}

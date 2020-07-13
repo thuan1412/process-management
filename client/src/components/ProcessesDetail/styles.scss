@@ -1,23 +1,39 @@
-.proces-detail {
-  width: 500px;
+.processes-detail {
+  width: 450px;
   padding: 30px;
 
   .create-btn {
     margin-left: 100px;
     margin-bottom: 30px;
   }
-  .proces-container {
+
+  .processes-container {
     height: 500px;
     overflow-y: scroll;
+
     .proc-detail {
       display: flex;
       flex-direction: column;
       padding-left: 10px;
       padding-bottom: 30px;
-      margin-bottom: 100px;
+      // margin-bottom: 100px;
       width: 80%;
+      height: 250px;
+      border-bottom: 1px solid black;
 
-      .graph-btns {
+      .process-label {
+        margin-left: 30px;
+      }
+      .view-log-btn {
+        margin-left: 25px;
+        margin-bottom: 10px;
+        width: 150px;
+        border-radius: 100px;
+        background-color: rgb(90, 209, 228);
+        color: rgb(75, 112, 24);
+      }
+
+      .graph-btn-container {
         display: flex;
         flex-direction: row;
       }
