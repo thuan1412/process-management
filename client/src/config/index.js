@@ -17,9 +17,14 @@ const PROCESSES = {
 const LOG = {
   LOG: "/api/log",
 };
+
+const RABBITMQ = {
+  QUEUE: "/api/rabbitmq/queue",
+};
 export const API = {
   BASE: process.env.SERVER_URL || "http://localhost:3001",
   PM2: PM2,
   PROCESSES: PROCESSES,
   LOG: LOG,
+  RABBITMQ,
 };

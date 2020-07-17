@@ -5,9 +5,8 @@ const INITIAL_STATE = [];
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case RECEIVE_PROCESSES:
-      return action.processesName;
+      return action.processes;
     default:
       return state;
   }
 };
-  

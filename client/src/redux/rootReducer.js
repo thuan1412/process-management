@@ -1,10 +1,10 @@
 import { combineReducers } from "redux";
-import processesName from "./processesName/reducers";
+import processes from "./processes/reducers";
 import processesDetail from "./processesDetail/reducers";
 import selectedProcess from "./selectedProcess/reducers";
 
 export default combineReducers({
-  processesName: processesName,
+  processes: processes,
   processesDetail: processesDetail,
   selectedProcess: selectedProcess,
 });
